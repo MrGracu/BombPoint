@@ -3,7 +3,7 @@ REM +-----------------------------------------------------------+
 REM | Copyright ?(c) 2017 by Gracjan Mika. All rights reserved. |
 REM +-----------------------------------------------------------+
 color 0A
-mode con cols=37 lines=26
+mode con cols=37 lines=27
 title Made by Gracjan Mika
 echo.
 echo.
@@ -254,7 +254,7 @@ echo  บ%b280%%b281%%b282%%b283%%b284%%b285%%b286%%b287%%b288%%b289%%b290%%b291%%
 echo  บ%b300%%b301%%b302%%b303%%b304%%b305%%b306%%b307%%b308%%b309%%b310%%b311%%b312%%b313%%b314%%b315%%b316%%b317%%b318%%b319%บ  บ                         บ
 echo  ฬออออออออออออออออออออน  ฬอออออออออออออออออออออออออน
 echo  บ   Punkty: %iloscpunktowpunktowanych%    บ  บ                         บ
-echo  บ   Znikacze: %liczbaznikaczywyswietl%    บ  บ      Version: 9.1       บ
+echo  บ   Znikacze: %liczbaznikaczywyswietl%    บ  บ      Version: 9.2       บ
 echo  บ    Twarz: %twarztxt%  บ  บ                         บ
 echo  ศอออออออออหออออออออออผ  ศออออออออออออหออออออออออออผ
 echo            บ        Poziom: %lvl%         บ
