@@ -30,7 +30,7 @@ for /l %%r in (0,1,319) do set q%%r=-1
 set poziom=9
 set pion=160
 set kep=149
-set b%kep%=
+set b%kep%=#
 set position=149
 set punkcik=X
 set twarz=2
@@ -210,7 +210,7 @@ set /a lvl=%lvl%+1
 for /l %%g in (0,1,319) do set b%%g= 
 for /l %%k in (0,1,319) do set p%%k=-1
 for /l %%r in (0,1,319) do set q%%r=-1
-set b%kep%=
+set b%kep%=#
 set b%pozycjapunktu%=%punkcik%
 set /a p%pozycjapunktu%=%pozycjapunktu%
 goto menu
@@ -292,7 +292,7 @@ set b%kep%=
 set /a kep=%kep%-1
 set twarz=1
 set /a poziom=%poziom%-1
-set b%kep%=
+set b%kep%=#
 set /a napozycjip=p%kep%
 set /a uwagaanabombe=q%kep%
 if %uwagaanabombe% GEQ 0 (
@@ -316,7 +316,7 @@ set b%kep%=
 set /a kep=%kep%+1
 set twarz=4
 set /a poziom=%poziom%+1
-set b%kep%=
+set b%kep%=#
 set /a napozycjip=p%kep%
 set /a uwagaanabombe=q%kep%
 if %uwagaanabombe% GEQ 0 (
@@ -339,7 +339,7 @@ set b%kep%=
 set /a kep=%kep%-20
 set twarz=2
 set /a pion=%pion%-20
-set b%kep%=
+set b%kep%=#
 set /a napozycjip=p%kep%
 set /a uwagaanabombe=q%kep%
 if %uwagaanabombe% GEQ 0 (
@@ -362,7 +362,7 @@ set b%kep%=
 set /a kep=%kep%+20
 set twarz=3
 set /a pion=%pion%+20
-set b%kep%=
+set b%kep%=#
 set /a napozycjip=p%kep%
 set /a uwagaanabombe=q%kep%
 if %uwagaanabombe% GEQ 0 (
@@ -376,6 +376,29 @@ goto nowylosowypunkt
 )
 set /a czybombakep=%kep%+20
 goto menu
+:ciagdalszyklukluuu
+set /a pozycjapunktu=%pozycjapunktuiu%
+if %pozycjapunktu% GEQ 320 (
+goto nowylosowypunktpetla
+)
+set /a pozycjabombomiejsca=q%pozycjapunktu%
+if %pozycjapunktu% EQU %pozycjabombomiejsca% (
+goto nowylosowypunktpetla
+)
+if %pozycjapunktu% EQU %starapozycjapunktu% (
+goto nowylosowypunktpetla
+)
+set /a bombomiejscerezerwa=q%pozycjapunktu%
+if %bombomiejscerezerwa% EQU %pozycjapunktu% (
+goto nowylosowypunktpetla
+)
+set /a pozycjaludka=b%pozycjapunktu%
+if %pozycjapunktu% EQU %pozycjaludka% (
+goto nowylosowypunktpetla
+)
+set /a p%pozycjapunktu%=%pozycjapunktu%
+set b%pozycjapunktu%=%punkcik%
+goto ustawbombepopunkcie
 :nowylosowypunkt
 set starapozycjapunktu=%pozycjapunktu%
 :nowylosowypunktpetla
@@ -508,28 +531,38 @@ if %pozycjapunktuiu% GEQ 1001 (
 set /a pozycjapunktuiu=%pozycjapunktuiu%-1000
 goto ciagdalszyklukluuu
 )
-:ciagdalszyklukluuu
-set /a pozycjapunktu=%pozycjapunktuiu%
-if %pozycjapunktu% GEQ 320 (
-goto nowylosowypunktpetla
+goto ciagdalszyklukluuu
+:ustawieniebomyombybyyy
+set /a kolejnapozycjabomby=%pozycjapunktuiuzbomba%
+if %kolejnapozycjabomby% GEQ 320 (
+goto ustawbombepopunkcie
 )
-set /a pozycjabombomiejsca=q%pozycjapunktu%
-if %pozycjapunktu% EQU %pozycjabombomiejsca% (
-goto nowylosowypunktpetla
+set /a czytamjestbomba=q%kolejnapozycjabomby%
+if %kolejnapozycjabomby% EQU %czytamjestbomba% (
+goto ustawbombepopunkcie
 )
-if %pozycjapunktu% EQU %starapozycjapunktu% (
-goto nowylosowypunktpetla
+set /a pozucjapunktuczy=p%kolejnapozycjabomby%
+if %kolejnapozycjabomby% EQU %pozucjapunktuczy% (
+goto ustawbombepopunkcie
 )
-set /a bombomiejscerezerwa=q%pozycjapunktu%
-if %bombomiejscerezerwa% EQU %pozycjapunktu% (
-goto nowylosowypunktpetla
+set /a pozycjaludkabomba=b%kolejnapozycjabomby%
+if %kolejnapozycjabomby% EQU %pozycjaludkabomba% (
+goto ustawbombepopunkcie
 )
-set /a pozycjaludka=b%pozycjapunktu%
-if %pozycjapunktu% EQU %pozycjaludka% (
-goto nowylosowypunktpetla
+if %kolejnapozycjabomby% EQU %starapozycjapunktu% (
+goto ustawbombepopunkcie
 )
-set /a p%pozycjapunktu%=%pozycjapunktu%
-set b%pozycjapunktu%=%punkcik%
+if %kolejnapozycjabomby% EQU %pozycjapunktu% (
+goto ustawbombepopunkcie
+)
+set /a q%kolejnapozycjabomby%=%kolejnapozycjabomby%
+set b%kolejnapozycjabomby%=%ikobomby%
+set /a ilejuzjestbomb=%ilejuzjestbomb%+1
+if %ilejuzjestbomb% EQU 12 (
+set ilejuzjestbomb=0
+set /a liczbaznikaczy=%liczbaznikaczy%+1
+)
+goto menu
 
 :ustawbombepopunkcie
 set /a pozycjapunktuiuzbomba=%random%
@@ -661,37 +694,7 @@ if %pozycjapunktuiuzbomba% GEQ 1001 (
 set /a pozycjapunktuiuzbomba=%pozycjapunktuiuzbomba%-1000
 goto ustawieniebomyombybyyy
 )
-:ustawieniebomyombybyyy
-set /a kolejnapozycjabomby=%pozycjapunktuiuzbomba%
-if %kolejnapozycjabomby% GEQ 320 (
-goto ustawbombepopunkcie
-)
-set /a czytamjestbomba=q%kolejnapozycjabomby%
-if %kolejnapozycjabomby% EQU %czytamjestbomba% (
-goto ustawbombepopunkcie
-)
-set /a pozucjapunktuczy=p%kolejnapozycjabomby%
-if %kolejnapozycjabomby% EQU %pozucjapunktuczy% (
-goto ustawbombepopunkcie
-)
-set /a pozycjaludkabomba=b%kolejnapozycjabomby%
-if %kolejnapozycjabomby% EQU %pozycjaludkabomba% (
-goto ustawbombepopunkcie
-)
-if %kolejnapozycjabomby% EQU %starapozycjapunktu% (
-goto ustawbombepopunkcie
-)
-if %kolejnapozycjabomby% EQU %pozycjapunktu% (
-goto ustawbombepopunkcie
-)
-set /a q%kolejnapozycjabomby%=%kolejnapozycjabomby%
-set b%kolejnapozycjabomby%=%ikobomby%
-set /a ilejuzjestbomb=%ilejuzjestbomb%+1
-if %ilejuzjestbomb% EQU 12 (
-set ilejuzjestbomb=0
-set /a liczbaznikaczy=%liczbaznikaczy%+1
-)
-goto menu
+goto ustawieniebomyombybyyy
 
 :poddaniesiekomenda
 mode con cols=53 lines=8
