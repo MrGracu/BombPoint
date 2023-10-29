@@ -1,7 +1,7 @@
 @echo off
-REM +-----------------------------------------------------------+
-REM | Copyright ?(c) 2017 by Gracjan Mika. All rights reserved. |
-REM +-----------------------------------------------------------+
+REM +----------------------------------------------------------+
+REM | Copyright (c) 2017 by Gracjan Mika. All rights reserved. |
+REM +----------------------------------------------------------+
 color 0A
 mode con cols=37 lines=27
 title Made by Gracjan Mika
@@ -23,6 +23,9 @@ ping localhost -n 2.0>nul
 title BombPoint
 mode con cols=53 lines=27
 
+set userIcon=0
+set pointIcon=X
+set bombIcon=Û
 :nowe
 for /l %%g in (0,1,319) do set b%%g= 
 for /l %%k in (0,1,319) do set p%%k=-1
@@ -30,14 +33,12 @@ for /l %%r in (0,1,319) do set q%%r=-1
 set poziom=9
 set pion=160
 set kep=149
-set b%kep%=#
+set b%kep%=%userIcon%
 set position=149
-set punkcik=X
 set twarz=2
 set lvl=1
 set ilejuzjestbomb=0
 set punkty=0
-set ikobomby=Û
 set liczbaznikaczy=0
 :poerwszapowtorka
 set /a pozycjapunktuiu=%random%
@@ -175,7 +176,7 @@ if %pozycjapunktu% GEQ 320 (
 goto poerwszapowtorka
 )
 set /a p%pozycjapunktu%=%pozycjapunktu%
-set b%pozycjapunktu%=%punkcik%
+set b%pozycjapunktu%=%pointIcon%
 :menu
 if %twarz% EQU 1 (
 set twarztxt=Lewo   
@@ -210,8 +211,8 @@ set /a lvl=%lvl%+1
 for /l %%g in (0,1,319) do set b%%g= 
 for /l %%k in (0,1,319) do set p%%k=-1
 for /l %%r in (0,1,319) do set q%%r=-1
-set b%kep%=#
-set b%pozycjapunktu%=%punkcik%
+set b%kep%=%userIcon%
+set b%pozycjapunktu%=%pointIcon%
 set /a p%pozycjapunktu%=%pozycjapunktu%
 goto menu
 )
@@ -292,7 +293,7 @@ set b%kep%=
 set /a kep=%kep%-1
 set twarz=1
 set /a poziom=%poziom%-1
-set b%kep%=#
+set b%kep%=%userIcon%
 set /a napozycjip=p%kep%
 set /a uwagaanabombe=q%kep%
 if %uwagaanabombe% GEQ 0 (
@@ -316,7 +317,7 @@ set b%kep%=
 set /a kep=%kep%+1
 set twarz=4
 set /a poziom=%poziom%+1
-set b%kep%=#
+set b%kep%=%userIcon%
 set /a napozycjip=p%kep%
 set /a uwagaanabombe=q%kep%
 if %uwagaanabombe% GEQ 0 (
@@ -339,7 +340,7 @@ set b%kep%=
 set /a kep=%kep%-20
 set twarz=2
 set /a pion=%pion%-20
-set b%kep%=#
+set b%kep%=%userIcon%
 set /a napozycjip=p%kep%
 set /a uwagaanabombe=q%kep%
 if %uwagaanabombe% GEQ 0 (
@@ -362,7 +363,7 @@ set b%kep%=
 set /a kep=%kep%+20
 set twarz=3
 set /a pion=%pion%+20
-set b%kep%=#
+set b%kep%=%userIcon%
 set /a napozycjip=p%kep%
 set /a uwagaanabombe=q%kep%
 if %uwagaanabombe% GEQ 0 (
@@ -397,7 +398,7 @@ if %pozycjapunktu% EQU %pozycjaludka% (
 goto nowylosowypunktpetla
 )
 set /a p%pozycjapunktu%=%pozycjapunktu%
-set b%pozycjapunktu%=%punkcik%
+set b%pozycjapunktu%=%pointIcon%
 goto ustawbombepopunkcie
 :nowylosowypunkt
 set starapozycjapunktu=%pozycjapunktu%
@@ -556,7 +557,7 @@ if %kolejnapozycjabomby% EQU %pozycjapunktu% (
 goto ustawbombepopunkcie
 )
 set /a q%kolejnapozycjabomby%=%kolejnapozycjabomby%
-set b%kolejnapozycjabomby%=%ikobomby%
+set b%kolejnapozycjabomby%=%bombIcon%
 set /a ilejuzjestbomb=%ilejuzjestbomb%+1
 if %ilejuzjestbomb% EQU 12 (
 set ilejuzjestbomb=0
